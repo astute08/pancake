@@ -10,26 +10,39 @@ export default () => {
   const { Option } = Select;
 
   useEffect(() => {
-    // console.log("useEffect work");
     isPrimeFunction();
     isFibonacciFunction();
   }, [selectValue, inputValue]);
 
   const onChangeInput = (e) => {
     const value = e.target.value;
+    const re = /^[0-9\.-]+$/;
+
     const num = Number(Math.round(value).toFixed(0));
+    const minusNum = value.replace(re, "1");
+
 
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
-    
-    setInputValue(value);
-    setTypingTimeout(
-      setTimeout(function () {
-        setInputValue(num);
-      }, 2000)
-    );
 
+    if (value === "" || re.test(value)) {
+      if (parseInt(value) < 1) {
+        setInputValue(value);
+        setTypingTimeout(
+          setTimeout(function () {
+            setInputValue(minusNum);
+          }, 2000)
+        );
+      } else {
+        setInputValue(value);
+        setTypingTimeout(
+          setTimeout(function () {
+            setInputValue(num);
+          }, 2000)
+        );
+      }
+    }
   };
 
   const handleChange = (value) => {
@@ -78,7 +91,6 @@ export default () => {
   const resultOfPrime = JSON.stringify(isPrimeFunction());
   const resultOfFibonacci = JSON.stringify(isFibonacciFunction());
   const result = selectValue === "isPrime" ? resultOfPrime : resultOfFibonacci;
-  // console.log(Number((6.688689).toFixed(1)));
 
   return (
     <div>
