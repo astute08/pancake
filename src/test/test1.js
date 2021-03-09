@@ -6,6 +6,7 @@ export default () => {
   const [inputValue, setInputValue] = useState("");
   const [selectValue, setSelectValue] = useState("");
   const [typingTimeout, setTypingTimeout] = useState(0);
+  const { height, width } = useWindowDimensions();
 
   const { Option } = Select;
 
@@ -20,7 +21,6 @@ export default () => {
 
     const num = Number(Math.round(value).toFixed(0));
     const minusNum = value.replace(re, "1");
-
 
     if (typingTimeout) {
       clearTimeout(typingTimeout);
@@ -115,3 +115,27 @@ export default () => {
     </div>
   );
 };
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowDimensions;
+}
