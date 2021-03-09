@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Table, Input, Button, Space } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
+
 import './test.css'
 // import Highlighter from 'react-highlight-words';
 
 export default () => {
-  const searchInputRef = useRef(null);
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
+
   const [dataSource, setDataSource] = useState();
   const [term, setTerm] = useState("");
 
@@ -31,7 +28,6 @@ export default () => {
     setDataSource(data);
   };
 
-  console.log("Datasource", dataSource);
 
   const searchHandler = (event) => {
     const value = event.target.value;
@@ -40,14 +36,6 @@ export default () => {
 
   //////////////////////////////////////////////////
 
-  const columns = [
-    {
-      title: "",
-      index: "0",
-      key: "name",
-      width: "30%",
-    },
-  ];
 
   return (
     <div>
