@@ -15,6 +15,19 @@
     border: 2px solid #000000;
 
 }
+.search {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    width: 200px;
+    margin-top: 20px;
+  }
+  
 td, th {
     text-align: left;
     padding: 8px;
