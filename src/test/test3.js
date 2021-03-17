@@ -20,54 +20,26 @@ export default () => {
     setValueB(value);
   };
 
-  const onPlusFunction = () => {
-    if (valueA !== "" || valueB !== "") {
-      const result = parseFloat(valueA) + parseFloat(valueB);
-      setResult(result);
-    } else {
-      setResult("");
-    }
-    setActiveBtn("plus");
-  };
+  const onCalculateFunction = (value) => {
+    let result = 0;
+    const valueX = parseFloat(valueA);
+    const valueY = parseFloat(valueB);
 
-  const onMinusFunctiom = () => {
-    if (valueA !== "" || valueB !== "") {
-      const result = parseFloat(valueA) - parseFloat(valueB);
-      setResult(result);
+    if (value === "plus") {
+      result = valueX + valueY;
+    } else if (value === "minus") {
+      result = valueX - valueY;
+    } else if (value === "mul") {
+      result = valueX * valueY;
+    } else if (value === "div") {
+      result = valueX / valueY;
+    } else if (value === "pow") {
+      result = Math.pow(valueX, valueY);
     } else {
       setResult("");
     }
-    setActiveBtn("minus");
-  };
-
-  const onMultiplyFunction = () => {
-    if (valueA !== "" || valueB !== "") {
-      const result = parseFloat(valueA) * parseFloat(valueB);
-      setResult(result);
-    } else {
-      setResult("");
-    }
-    setActiveBtn("mul");
-  };
-
-  const onDivideFunction = () => {
-    if (valueA !== "" || valueB !== "") {
-      const result = parseFloat(valueA) / parseFloat(valueB);
-      setResult(result);
-    } else {
-      setResult("");
-    }
-    setActiveBtn("div");
-  };
-
-  const onPowFunction = () => {
-    if (valueA !== "" || valueB !== "") {
-      const result = Math.pow(parseFloat(valueA), parseFloat(valueB));
-      setResult(result);
-    } else {
-      setResult("");
-    }
-    setActiveBtn("pow");
+    setResult(result);
+    setActiveBtn(value);
   };
 
   console.log("result", result);
@@ -86,19 +58,49 @@ export default () => {
       </div>
       <div style={row}>
         <div style={column}>
-          <button style = {activeBtn === "plus" ? buttonActive : buttonNoActive} onClick={onPlusFunction}> + </button>
+          <button
+            style={activeBtn === "plus" ? buttonActive : buttonNoActive}
+            onClick={() => onCalculateFunction("plus")}
+          >
+            {" "}
+            +{" "}
+          </button>
         </div>
         <div style={column}>
-          <button style = {activeBtn === "minus" ? buttonActive : buttonNoActive}  onClick={onMinusFunctiom}> - </button>
+          <button
+            style={activeBtn === "minus" ? buttonActive : buttonNoActive}
+            onClick={() => onCalculateFunction("minus")}
+          >
+            {" "}
+            -{" "}
+          </button>
         </div>
         <div style={column}>
-          <button style = {activeBtn === "mul" ? buttonActive : buttonNoActive}  onClick={onMultiplyFunction}> x </button>
+          <button
+            style={activeBtn === "mul" ? buttonActive : buttonNoActive}
+            onClick={() => onCalculateFunction("mul")}
+          >
+            {" "}
+            x{" "}
+          </button>
         </div>
         <div style={column}>
-          <button style = {activeBtn === "div" ? buttonActive : buttonNoActive}  onClick={onDivideFunction}> / </button>
+          <button
+            style={activeBtn === "div" ? buttonActive : buttonNoActive}
+            onClick={() => onCalculateFunction("div")}
+          >
+            {" "}
+            /{" "}
+          </button>
         </div>
         <div style={column}>
-          <button style = {activeBtn === "pow" ? buttonActive : buttonNoActive}  onClick={onPowFunction}> Pow </button>
+          <button
+            style={activeBtn === "pow" ? buttonActive : buttonNoActive}
+            onClick={() => onCalculateFunction("pow")}
+          >
+            {" "}
+            Pow{" "}
+          </button>
         </div>
       </div>
       <div style={row}>
@@ -148,8 +150,8 @@ const buttonActive = {
 };
 
 const buttonNoActive = {
-    background: "#fff",
-  };
+  background: "#fff",
+};
 
 const buttonStyle = {
   float: "right",
